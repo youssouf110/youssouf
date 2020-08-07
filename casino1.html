@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roulette</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head>
+
+<body>
+  <main>
+    <p><a href="casino.html"><img src="home.png" alt="retour" id="b1"></a></p>
+    <h1>Roulette</h1>
+    <div>
+      Numéro:
+      <select name="" id="select">
+        <option value="pair">Pair</option>
+        <option value="impair">ImPair</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+        <option>11</option>
+        <option>12</option>
+        <option>13</option>
+        <option>14</option>
+        <option>15</option>
+        <option>16</option>
+        <option>17</option>
+        <option>18</option>
+        <option>19</option>
+        <option>20</option>
+        <option>21</option>
+        <option>22</option>
+        <option>23</option>
+        <option>24</option>
+        <option>25</option>
+        <option>26</option>
+        <option>27</option>
+        <option>28</option>
+        <option>29</option>
+        <option>30</option>
+        <option>31</option>
+        <option>32</option>
+        <option>33</option>
+        <option>34</option>
+        <option>35</option>
+        <option>36</option>
+      </select>
+
+      Mise:
+      <input type="number" name="" id="numero">
+      <button onclick="jeu();">Go</button>
+      <div id="msg"></div>
+      <div id="montant">
+        <div>Joueur: <span class="argent">100 mille FCFA</span></div>
+        <div>Casino: <span class="argent">0</span></div>
+      </div>
+    </div>
+  </main>
+  <script>
+    let montantJoueur = 100, montantOrdinateur = 0, mise, gain, nombreAleatoire;
+
+    function jeu() {
+      const select = document.getElementById('select');
+      const msg = document.getElementById('msg');
+      const numero = document.getElementById('numero');
+      const argent = document.getElementsByClassName('argent');
+      const number = document.getElementById('number');
+
+      mise = parseInt(numero.value);
+      if (mise > 0) {
+        nombreAleatoire = Math.floor(Math.random() * Math.floor(11));
+        if (nombreAleatoire === 0) {
+          montantJoueur -= mise;
+          montantOrdinateur += mise
+          msg.textContent = nombreAleatoire + " Perdu"
+        } else if (nombreAleatoire == select[select.selectedIndex].text) {
+          gain = mise * 36;
+          montantJoueur += gain
+          msg.textContent = nombreAleatoire + " Gagné"
+        } else if (nombreAleatoire % 2 === 0 && select.value === 'pair') {
+          gain = mise * 2;
+          montantJoueur += gain
+          msg.textContent = nombreAleatoire + " Gagné"
+        } else if (nombreAleatoire % 2 != 0 && select.value === 'impair') {
+          gain = mise * 2;
+          montantJoueur += gain
+          msg.textContent = nombreAleatoire + " Gagné"
+        } else {
+          montantJoueur -= mise;
+          montantOrdinateur += mise;
+          msg.textContent = nombreAleatoire + " Perdu"
+        }
+        argent[0].textContent = montantJoueur + " mille FCFA"
+        if (montantOrdinateur != 0) argent[1].textContent = montantOrdinateur + " mille FCFA"
+      }
+    }
+  </script>
+</body>
+
+</html>
